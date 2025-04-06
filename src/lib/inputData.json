@@ -1,0 +1,1006 @@
+{
+  "sections": {
+    "VerificationInformation": {
+      "order": 1,
+      "layout": "left",
+      "title": "Verification Information",
+      "tooltip": "Information collected during the verification call",
+      "bgColor": "#f4fae6",
+      "fields": {
+        "InsuranceRepresentativeName": {
+          "value": "",
+          "title": "Insurance Representative Name",
+          "interface": {
+            "type": "text"
+          },
+          "key": "VerificationInformation.InsuranceRepresentativeName",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "hidden": false,
+          "placeholder": "Insurance Representative Name",
+          "disabled": false,
+          "tooltip": "Insurance Representative Name",
+          "colSpan": "1"
+        },
+        "CallReferenceNumber": {
+          "value": "",
+          "title": "Call Reference Number",
+          "interface": {
+            "type": "text"
+          },
+          "key": "VerificationInformation.CallReferenceNumber",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "hidden": false,
+          "placeholder": "Call Reference Number",
+          "disabled": false,
+          "tooltip": "Call Reference Number",
+          "colSpan": "1"
+        },
+        "AdditionalInformation": {
+          "value": "",
+          "title": "Additional Information",
+          "interface": {
+            "type": "text"
+          },
+          "key": "VerificationInformation.AdditionalInformation",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "Additional Information",
+          "disabled": false,
+          "tooltip": "Additional Information",
+          "colSpan": "1"
+        }
+      },
+      "stats": {
+        "total": 3,
+        "filled": 0
+      }
+    },
+    "PatientInformation": {
+      "order": 2,
+      "layout": "right",
+      "title": "Patient Information",
+      "tooltip": "Patient's demographic and insurance details",
+      "bgColor": "#eefbf5",
+      "fields": {
+        "PatientName": {
+          "value": "Ricardo Boada",
+          "title": "Patient Name",
+          "interface": {
+            "type": "text"
+          },
+          "key": "PatientInformation.PatientName",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "source": {
+            "channel": "prefill",
+            "system": {
+              "id": "prefill"
+            },
+            "timestamp": "2024-12-16T17:55:29.005Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "DateOfBirth": {
+          "value": "4/14/89",
+          "title": "Date Of Birth",
+          "interface": {
+            "type": "date"
+          },
+          "key": "PatientInformation.DateOfBirth",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "source": {
+            "channel": "prefill",
+            "system": {
+              "id": "prefill"
+            },
+            "timestamp": "2024-12-16T17:55:29.005Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "SubscriberID": {
+          "value": "796380844 01",
+          "title": "Subscriber ID",
+          "interface": {
+            "type": "text"
+          },
+          "key": "PatientInformation.SubscriberID",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "source": {
+            "channel": "prefill",
+            "system": {
+              "id": "prefill"
+            },
+            "timestamp": "2024-12-16T17:55:29.005Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "SubscriberName": {
+          "value": "Ricardo Boada",
+          "title": "Subscriber Name",
+          "interface": {
+            "type": "text"
+          },
+          "key": "PatientInformation.SubscriberName",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "source": {
+            "channel": "prefill",
+            "system": {
+              "id": "prefill"
+            },
+            "timestamp": "2024-12-16T17:55:29.005Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "SubscriberDOB": {
+          "value": "4/14/89",
+          "title": "Subscriber DOB",
+          "interface": {
+            "type": "date"
+          },
+          "key": "PatientInformation.SubscriberDOB",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "source": {
+            "channel": "prefill",
+            "system": {
+              "id": "prefill"
+            },
+            "timestamp": "2024-12-16T17:55:29.005Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "TodaysDate": {
+          "value": "12/16/2024",
+          "title": "Todays Date",
+          "interface": {
+            "type": "date"
+          },
+          "key": "PatientInformation.TodaysDate",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "source": {
+            "channel": "prefill",
+            "system": {
+              "id": "prefill"
+            },
+            "timestamp": "2024-12-16T17:55:29.005Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "DateOfService": {
+          "value": "12/19/2024",
+          "title": "Date Of Service",
+          "interface": {
+            "type": "date"
+          },
+          "key": "PatientInformation.DateOfService",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "source": {
+            "channel": "prefill",
+            "system": {
+              "id": "prefill"
+            },
+            "timestamp": "2024-12-16T17:55:29.005Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "ZipCode": {
+          "value": "33186",
+          "title": "Zip Code",
+          "interface": {
+            "type": "text"
+          },
+          "key": "PatientInformation.ZipCode",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "source": {
+            "channel": "prefill",
+            "system": {
+              "id": "prefill"
+            },
+            "timestamp": "2024-12-16T17:55:29.005Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "InsuredRelation": {
+          "value": "",
+          "title": "Insured Relation",
+          "interface": {
+            "type": "select",
+            "options": ["SELF", "SPOUSE", "CHILD", "DEPENDANT", "OTHER"]
+          },
+          "key": "PatientInformation.InsuredRelation",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "COB": {
+          "value": "",
+          "title": "COB",
+          "interface": {
+            "type": "select",
+            "options": ["Standard", "Non Duplication", "Birthday"]
+          },
+          "key": "PatientInformation.COB",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "No COB"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        }
+      },
+      "stats": {
+        "total": 10,
+        "filled": 8
+      }
+    },
+    "InsuranceInformation": {
+      "order": 3,
+      "layout": "full",
+      "title": "Insurance Information",
+      "tooltip": "Insurance policy and coverage details",
+      "bgColor": "#e4f1e8",
+      "fields": {
+        "InsuranceProvider": {
+          "value": "Cigna",
+          "title": "Insurance Provider",
+          "interface": {
+            "type": "text"
+          },
+          "key": "InsuranceInformation.InsuranceProvider",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "source": {
+            "channel": "prefill",
+            "system": {
+              "id": "prefill"
+            },
+            "timestamp": "2024-12-16T17:55:29.005Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "PlanType": {
+          "value": "",
+          "title": "Plan Type",
+          "interface": {
+            "type": "text"
+          },
+          "key": "InsuranceInformation.PlanType",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "GroupName": {
+          "value": "",
+          "title": "Group Name",
+          "interface": {
+            "type": "text"
+          },
+          "key": "InsuranceInformation.GroupName",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "GroupNumber": {
+          "value": "",
+          "title": "Group Number",
+          "interface": {
+            "type": "text"
+          },
+          "key": "InsuranceInformation.GroupNumber",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "EffectiveDate": {
+          "value": "",
+          "title": "Effective Date",
+          "interface": {
+            "type": "date"
+          },
+          "key": "InsuranceInformation.EffectiveDate",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "PlanStartDate": {
+          "value": "",
+          "title": "Plan Start Date",
+          "interface": {
+            "type": "date"
+          },
+          "key": "InsuranceInformation.PlanStartDate",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "PlanYear": {
+          "value": "",
+          "title": "Plan Year",
+          "interface": {
+            "type": "select",
+            "options": ["CALENDAR", "FISCAL"]
+          },
+          "key": "InsuranceInformation.PlanYear",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "FiscalPlanMonth": {
+          "value": "",
+          "title": "Fiscal Plan Month",
+          "interface": {
+            "type": "select",
+            "options": [
+              "JAN",
+              "FEB",
+              "MAR",
+              "APR",
+              "MAY",
+              "JUN",
+              "JUL",
+              "AUG",
+              "SEP",
+              "OCT",
+              "NOV",
+              "DEC"
+            ]
+          },
+          "key": "InsuranceInformation.FiscalPlanMonth",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "InOutOfNetwork": {
+          "value": "",
+          "title": "In Out Of Network",
+          "interface": {
+            "type": "select",
+            "options": ["IN", "OUT"]
+          },
+          "key": "InsuranceInformation.InOutOfNetwork",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "InsuranceCompanyPhoneNumber": {
+          "value": "+1-800-244-6224",
+          "title": "Insurance Company Phone Number",
+          "interface": {
+            "type": "text"
+          },
+          "key": "InsuranceInformation.InsuranceCompanyPhoneNumber",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "source": {
+            "channel": "prefill",
+            "system": {
+              "id": "prefill"
+            },
+            "timestamp": "2024-12-16T17:55:29.005Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "InsuranceClaimMailingAddress": {
+          "value": "PO Box 182223, Chattanooga, TN, 37422, USA",
+          "title": "Insurance Claim Mailing Address",
+          "interface": {
+            "type": "text"
+          },
+          "key": "InsuranceInformation.InsuranceClaimMailingAddress",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "source": {
+            "channel": "prefill",
+            "system": {
+              "id": "prefill"
+            },
+            "timestamp": "2024-12-16T17:55:29.005Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "PayorID": {
+          "value": "jjnjjh",
+          "title": "Payor ID",
+          "interface": {
+            "type": "text"
+          },
+          "key": "InsuranceInformation.PayorID",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "source": {
+            "channel": "human",
+            "human": {
+              "id": "67372f59b6cb243204a0a1b8",
+              "name": "Ayush Pathak",
+              "email": "ayush@induced.ai"
+            },
+            "timestamp": "2024-12-21T04:46:10.316Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        }
+      },
+      "stats": {
+        "total": 12,
+        "filled": 4
+      }
+    },
+    "CoveragePercentages": {
+      "order": 4,
+      "layout": "full",
+      "title": "Coverage Percentages",
+      "bgColor": "#e4f1e8",
+      "fields": {
+        "Diagnostic": {
+          "value": "",
+          "title": "Diagnostic",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CoveragePercentages.Diagnostic.percentage",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "Preventive": {
+          "value": "jhhjjh",
+          "title": "Preventive",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CoveragePercentages.Preventive.percentage",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "source": {
+            "channel": "human",
+            "human": {
+              "id": "67372f59b6cb243204a0a1b8",
+              "name": "Ayush Pathak",
+              "email": "ayush@induced.ai"
+            },
+            "timestamp": "2024-12-21T04:46:10.317Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "Basic": {
+          "value": "jhjh",
+          "title": "Basic",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CoveragePercentages.Basic.percentage",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "source": {
+            "channel": "human",
+            "human": {
+              "id": "67372f59b6cb243204a0a1b8",
+              "name": "Ayush Pathak",
+              "email": "ayush@induced.ai"
+            },
+            "timestamp": "2024-12-21T04:46:10.317Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "Major": {
+          "value": "jjhjh",
+          "title": "Major",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CoveragePercentages.Major.percentage",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "source": {
+            "channel": "human",
+            "human": {
+              "id": "67372f59b6cb243204a0a1b8",
+              "name": "Ayush Pathak",
+              "email": "ayush@induced.ai"
+            },
+            "timestamp": "2024-12-21T04:46:10.317Z"
+          },
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "Endodontics": {
+          "value": "",
+          "title": "Endodontics",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CoveragePercentages.Endodontics.percentage",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "Periodontics": {
+          "value": "",
+          "title": "Periodontics",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CoveragePercentages.Periodontics.percentage",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "OralSurgery": {
+          "value": "",
+          "title": "OralSurgery",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CoveragePercentages.OralSurgery.percentage",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "Orthodontics": {
+          "value": "",
+          "title": "Orthodontics",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CoveragePercentages.Orthodontics.percentage",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not Applicable"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        }
+      },
+      "stats": {
+        "total": 8,
+        "filled": 3
+      }
+    },
+    "MaximumsAndDeductibles": {
+      "order": 5,
+      "layout": "full",
+      "title": "Maximums And Deductibles",
+      "bgColor": "#eefbf5",
+      "fields": {
+        "AnnualIndividualMaximum": {
+          "value": "",
+          "title": "Annual Individual Maximum",
+          "interface": {
+            "type": "text"
+          },
+          "key": "MaximumsAndDeductibles.AnnualIndividualMaximum",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "No Maximum"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "AnnualIndividualMaximumUsed": {
+          "value": "",
+          "title": "Annual Individual Maximum Used",
+          "interface": {
+            "type": "text"
+          },
+          "key": "MaximumsAndDeductibles.AnnualIndividualMaximumUsed",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "No Maximum"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "IndividualAnnualDeductible": {
+          "value": "",
+          "title": "Individual Annual Deductible",
+          "interface": {
+            "type": "text"
+          },
+          "key": "MaximumsAndDeductibles.IndividualAnnualDeductible",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "No Deductible"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "IndividualAnnualDeductibleUsed": {
+          "value": "",
+          "title": "Individual Annual Deductible Used",
+          "interface": {
+            "type": "text"
+          },
+          "key": "MaximumsAndDeductibles.IndividualAnnualDeductibleUsed",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "No Deductible"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "FamilyAnnualDeductible": {
+          "value": "",
+          "title": "Family Annual Deductible",
+          "interface": {
+            "type": "text"
+          },
+          "key": "MaximumsAndDeductibles.FamilyAnnualDeductible",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "No Deductible"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "FamilyAnnualDeductibleUsed": {
+          "value": "",
+          "title": "Family Annual Deductible Used",
+          "interface": {
+            "type": "text"
+          },
+          "key": "MaximumsAndDeductibles.FamilyAnnualDeductibleUsed",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "No Deductible"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "Annual individual deductible applies to preventative or diagnostic?": {
+          "value": "",
+          "title": "Annual individual deductible applies to preventative or diagnostic?",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CustomQuestions.2.answer",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        }
+      },
+      "stats": {
+        "total": 7,
+        "filled": 0
+      }
+    },
+    "Questions": {
+      "order": 6,
+      "layout": "full",
+      "title": "Questions",
+      "bgColor": "#e5faee",
+      "fields": {
+        "Is there a missing tooth clause?": {
+          "value": "",
+          "title": "Is there a missing tooth clause?",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CustomQuestions.0.answer",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "What waiting periods exist?": {
+          "value": "",
+          "title": "What waiting periods exist?",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CustomQuestions.1.answer",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "Can Pano and Bitewings be done the same day?": {
+          "value": "",
+          "title": "Can Pano and Bitewings be done the same day?",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CustomQuestions.3.answer",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "Crowns paid on prep or seat date?": {
+          "value": "",
+          "title": "Crowns paid on prep or seat date?",
+          "interface": {
+            "type": "text"
+          },
+          "key": "CustomQuestions.5.answer",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        }
+      },
+      "stats": {
+        "total": 4,
+        "filled": 0
+      }
+    },
+    "OrthodonticInformation": {
+      "order": 7,
+      "layout": "full",
+      "title": "Orthodontic Information",
+      "bgColor": "#e5faee",
+      "fields": {
+        "AgeLimit": {
+          "value": "",
+          "title": "Age Limit",
+          "interface": {
+            "type": "text"
+          },
+          "key": "OrthodonticInformation.AgeLimit",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "Not Covered"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "OrthoLifetimeMaximum": {
+          "value": "",
+          "title": "Ortho Lifetime Maximum",
+          "interface": {
+            "type": "text"
+          },
+          "key": "OrthodonticInformation.OrthoLifetimeMaximum",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "No Maximum"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "OrthoLifetimeMaximumUsed": {
+          "value": "",
+          "title": "Ortho Lifetime Maximum Used",
+          "interface": {
+            "type": "text"
+          },
+          "key": "OrthodonticInformation.OrthoLifetimeMaximumUsed",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "No Maximum"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "OrthoIndividualDeductibleAmount": {
+          "value": "",
+          "title": "Ortho Individual Deductible Amount",
+          "interface": {
+            "type": "text"
+          },
+          "key": "OrthodonticInformation.OrthoIndividualDeductibleAmount",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "No Deductible"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        },
+        "OrthoIndividualDeductibleAmountUsed": {
+          "value": "",
+          "title": "Ortho Individual Deductible Amount Used",
+          "interface": {
+            "type": "text"
+          },
+          "key": "OrthodonticInformation.OrthoIndividualDeductibleAmountUsed",
+          "required": false,
+          "defaultValue": "",
+          "defaultOptions": ["Not provided by Insurance", "No Deductible"],
+          "hidden": false,
+          "placeholder": "",
+          "disabled": false,
+          "tooltip": "",
+          "colSpan": "2"
+        }
+      },
+      "stats": {
+        "total": 5,
+        "filled": 0
+      }
+    }
+  }
+}

@@ -1,10 +1,9 @@
 import "./App.css";
-import { useDntelForm, DntelForm } from "./packages/hooks/useDntelForm";
+import { useDntelForm } from "./packages/hooks/useDntelForm";
+import inputData from "./lib/inputData.json";
 
 function App() {
-  const { editMode } = useDntelForm({ section: ["noe"] }, "123");
-
-  console.log(editMode, "state");
+  const { DntelForm } = useDntelForm(inputData, "test");
 
   return (
     <>
