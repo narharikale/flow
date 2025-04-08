@@ -22,6 +22,7 @@ type Props<TFieldValues extends FieldValues = FieldValues> = {
   description?: string;
   readonly?: boolean;
   required?: boolean;
+  disabled?: boolean;
   onChange?: (value: boolean) => void;
 };
 
@@ -32,6 +33,7 @@ const BooleanField = <TFieldValues extends FieldValues>({
   description,
   readonly,
   required,
+  disabled,
   onChange,
 }: Props<TFieldValues>) => {
   const handleChange = (
@@ -54,7 +56,7 @@ const BooleanField = <TFieldValues extends FieldValues>({
               onCheckedChange={(checked) =>
                 handleChange(field, checked as boolean)
               }
-              disabled={readonly}
+              disabled={disabled || readonly}
             />
           </FormControl>
           <div className="space-y-1 leading-none">

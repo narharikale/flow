@@ -29,6 +29,7 @@ type Props<TFieldValues extends FieldValues = FieldValues> = {
   readonly?: boolean;
   required?: boolean;
   readOnly?: boolean;
+  disabled?: boolean;
   onChange?: (value: string) => void;
 };
 const InputFormField = <TFieldValues extends FieldValues>({
@@ -40,6 +41,7 @@ const InputFormField = <TFieldValues extends FieldValues>({
   description,
   readonly,
   required,
+  disabled,
   onChange,
 }: Props<TFieldValues>) => {
   const handleChange = (
@@ -71,6 +73,7 @@ const InputFormField = <TFieldValues extends FieldValues>({
               placeholder={placeholder}
               required={required}
               readOnly={readonly}
+              disabled={disabled}
               {...field}
               onChange={(e) => handleChange(field, e.target.value)}
             />

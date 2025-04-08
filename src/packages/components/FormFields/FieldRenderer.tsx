@@ -11,9 +11,16 @@ type Props = {
   field: Field;
   fieldKey: string;
   sectionKey: string;
+  disabled?: boolean;
 };
 
-const FieldRenderer = ({ form, field, fieldKey, sectionKey }: Props) => {
+const FieldRenderer = ({
+  form,
+  field,
+  fieldKey,
+  sectionKey,
+  disabled,
+}: Props) => {
   const commonProps = {
     form,
     name: `sections.${sectionKey}.fields.${fieldKey}.value` as Path<FormValues>,
@@ -21,7 +28,7 @@ const FieldRenderer = ({ form, field, fieldKey, sectionKey }: Props) => {
     placeholder: field.placeholder,
     description: field.tooltip,
     required: field.required,
-    disabled: field.disabled,
+    disabled: disabled || field.disabled,
   };
 
   switch (field.interface.type) {

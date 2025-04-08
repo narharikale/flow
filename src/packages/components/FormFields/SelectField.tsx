@@ -36,6 +36,7 @@ type Props<TFieldValues extends FieldValues = FieldValues> = {
   description?: string;
   readonly?: boolean;
   required?: boolean;
+  disabled?: boolean;
   onChange?: (value: string) => void;
 };
 
@@ -49,6 +50,7 @@ const SelectField = <TFieldValues extends FieldValues>({
   description,
   readonly,
   required,
+  disabled,
   onChange,
 }: Props<TFieldValues>) => {
   const handleChange = (
@@ -77,7 +79,7 @@ const SelectField = <TFieldValues extends FieldValues>({
           <Select
             onValueChange={(value) => handleChange(field, value)}
             defaultValue={defaultValue}
-            disabled={readonly}
+            disabled={disabled || readonly}
           >
             <FormControl>
               <SelectTrigger>

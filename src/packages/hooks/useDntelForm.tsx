@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -16,13 +16,26 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { formSchema, FormValues } from "../utils/schema";
 
 function useDntelForm(initialData: FormValues, id?: string) {
-  const [editMode, setEditMode] = useState(false);
-  const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
+  const [editMode, setEditMode] = useState(true);
+  const [expandedSections, setExpandedSections] = useState<string[]>([]);
+  const [lastChangeTimestamp, setLastChangeTimestamp] = useState<number | null>(
+    null
+  );
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData,
   });
+
+  useEffect(() => {
+    const subscription = form.watch((_, { type }) => {
+      if (type === "change") {
+        setLastChangeTimestamp(Date.now());
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [form]);
 
   const handleSubmit = useCallback<SubmitHandler<FormValues>>((values) => {
     console.log(values, "values");
@@ -32,6 +45,31 @@ function useDntelForm(initialData: FormValues, id?: string) {
     () => Object.entries(initialData.sections),
     [initialData.sections]
   );
+
+  const expandAll = useCallback(() => {
+    const allSectionIds = sections.map((_, index) => `section-${index}`);
+    setExpandedSections(allSectionIds);
+  }, [sections]);
+
+  const collapseAll = useCallback(() => {
+    setExpandedSections([]);
+  }, []);
+
+  const expandSection = useCallback((sectionId: string) => {
+    setExpandedSections((prev) => {
+      if (prev.includes(sectionId)) {
+        return prev;
+      }
+      return [...prev, sectionId];
+    });
+  }, []);
+
+  const scrollToSection = useCallback((sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
 
   const DntelForm = useCallback(
     () => (
@@ -44,14 +82,13 @@ function useDntelForm(initialData: FormValues, id?: string) {
           }}
           className="grid grid-cols-2 gap-8"
         >
-          <button type="submit">SubmitHandler</button>
           {sections.map((section, index) => (
             <Accordion
-              type="single"
+              type="multiple"
               key={section[1].title + index}
-              collapsible
-              value={activeAccordion || undefined}
-              onValueChange={setActiveAccordion}
+              id={`section-${index}`}
+              value={expandedSections}
+              onValueChange={setExpandedSections}
               style={{ backgroundColor: section[1].bgColor }}
               className={cn(
                 "p-4 rounded-sm text-primary w-full h-fit",
@@ -76,6 +113,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
                         field={field[1]}
                         fieldKey={field[0]}
                         sectionKey={section[0]}
+                        disabled={!editMode}
                       />
                     </div>
                   ))}
@@ -86,13 +124,20 @@ function useDntelForm(initialData: FormValues, id?: string) {
         </form>
       </Form>
     ),
-    [form, id, handleSubmit, sections, activeAccordion]
+    [form, id, handleSubmit, sections, expandedSections, editMode]
   );
 
   return {
     editMode,
     setEditMode,
     DntelForm,
+    expandedSections,
+    setExpandedSections,
+    lastChangeTimestamp,
+    expandAll,
+    collapseAll,
+    expandSection,
+    scrollToSection,
   };
 }
 
