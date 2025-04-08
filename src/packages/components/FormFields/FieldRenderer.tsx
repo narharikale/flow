@@ -1,22 +1,22 @@
-import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { Field } from "@/packages/utils/types";
+import { UseFormReturn, Path } from "react-hook-form";
 import { InputFormField } from "./TextField";
 import { DateField } from "./DateField";
 import { SelectField } from "./SelectField";
 import { BooleanField } from "./BooleanField";
+import { Field } from "@/packages/utils/types";
+import { FormValues } from "@/packages/utils/schema";
 
-type Props<TFieldValues extends FieldValues = FieldValues> = {
-  form: UseFormReturn<TFieldValues>;
+type Props = {
+  form: UseFormReturn<FormValues>;
   field: Field;
+  fieldKey: string;
+  sectionKey: string;
 };
 
-const FieldRenderer = <TFieldValues extends FieldValues>({
-  form,
-  field,
-}: Props<TFieldValues>) => {
+const FieldRenderer = ({ form, field, fieldKey, sectionKey }: Props) => {
   const commonProps = {
     form,
-    name: field.key as Path<TFieldValues>,
+    name: `sections.${sectionKey}.fields.${fieldKey}.value` as Path<FormValues>,
     label: field.title,
     placeholder: field.placeholder,
     description: field.tooltip,

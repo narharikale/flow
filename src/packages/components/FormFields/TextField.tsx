@@ -37,7 +37,6 @@ const InputFormField = <TFieldValues extends FieldValues>({
   label,
   placeholder,
   type,
-  defaultValue,
   description,
   readonly,
   required,
@@ -71,7 +70,6 @@ const InputFormField = <TFieldValues extends FieldValues>({
               type={type}
               placeholder={placeholder}
               required={required}
-              defaultValue={defaultValue}
               readOnly={readonly}
               {...field}
               onChange={(e) => handleChange(field, e.target.value)}

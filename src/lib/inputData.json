@@ -547,6 +547,7 @@
       "order": 4,
       "layout": "full",
       "title": "Coverage Percentages",
+      "tooltip": "Coverage percentages for different dental procedures",
       "bgColor": "#e4f1e8",
       "fields": {
         "Diagnostic": {
@@ -714,6 +715,7 @@
       "order": 5,
       "layout": "full",
       "title": "Maximums And Deductibles",
+      "tooltip": "Annual maximums and deductibles information",
       "bgColor": "#eefbf5",
       "fields": {
         "AnnualIndividualMaximum": {
@@ -838,7 +840,8 @@
       "order": 6,
       "layout": "full",
       "title": "Questions",
-      "bgColor": "#e5faee",
+      "tooltip": "Additional questions about insurance coverage",
+      "bgColor": "#f4fae6",
       "fields": {
         "Is there a missing tooth clause?": {
           "value": "",

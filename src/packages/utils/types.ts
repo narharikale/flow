@@ -1,12 +1,17 @@
-export interface FieldInterface {
-  type: string;
-  options?: string[];
-}
+type source = {
+  channel: string;
+  timestamp: string;
 
-export interface Field {
+  [key: string]: string | { [key: string]: string };
+};
+
+export type Field = {
   value: string;
   title: string;
-  interface: FieldInterface;
+  interface: {
+    type: string;
+    options?: string[];
+  };
   key: string;
   required: boolean;
   defaultValue: string;
@@ -16,37 +21,27 @@ export interface Field {
   disabled: boolean;
   tooltip: string;
   colSpan: string;
-  source?: {
-    channel: string;
-    system?: {
-      id: string;
-    };
-    human?: {
-      id: string;
-      name: string;
-      email: string;
-    };
-    timestamp: string;
-  };
-}
+  source?: source;
+};
 
-export interface Section {
-  order: number;
-  layout: string;
-  title: string;
-  tooltip?: string;
-  bgColor: string;
-  fields: {
-    [key: string]: Field;
-  };
-  stats: {
-    total: number;
-    filled: number;
-  };
-}
+type Fields = {
+  [key: string]: Field;
+};
 
-export interface FormData {
+export type Data = {
   sections: {
-    [key: string]: Section;
+    [key: string]: {
+      order: number;
+      layout: string;
+      title: string;
+      tooltip: string;
+      bgColor: string;
+
+      fields: Fields;
+      stats: {
+        total: number;
+        filled: number;
+      };
+    };
   };
-}
+};
