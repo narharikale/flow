@@ -12,11 +12,11 @@ import {
 
 import { cn } from "@/lib/utils";
 import { FieldRenderer } from "@/packages/components/FormFields/FieldRenderer";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { formSchema, FormValues } from "../utils/schema";
 
 function useDntelForm(initialData: FormValues, id?: string) {
-  const [editMode, setEditMode] = useState(true);
+  const [editMode, setEditMode] = useState(false);
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [lastChangeTimestamp, setLastChangeTimestamp] = useState<number | null>(
@@ -26,7 +26,8 @@ function useDntelForm(initialData: FormValues, id?: string) {
 
   const getDraft = useCallback(() => {
     if (!id) return null;
-    const draft = localStorage.getItem(`dntel-form-draft-${id}`);
+    const key = `dntel-form-draft-${id}`;
+    const draft = localStorage.getItem(key);
     return draft ? JSON.parse(draft) : null;
   }, [id]);
 
@@ -34,6 +35,17 @@ function useDntelForm(initialData: FormValues, id?: string) {
     resolver: zodResolver(formSchema),
     defaultValues: getDraft() || initialData,
   });
+
+  useEffect(() => {
+    if (!id) return;
+    const key = `dntel-form-draft-${id}`;
+    const draft = localStorage.getItem(key);
+    if (draft) {
+      form.reset(JSON.parse(draft));
+    } else {
+      form.reset(initialData);
+    }
+  }, [id, form, initialData]);
 
   useEffect(() => {
     if (!id) return;
@@ -53,23 +65,11 @@ function useDntelForm(initialData: FormValues, id?: string) {
     return () => subscription.unsubscribe();
   }, [form, id]);
 
-  useEffect(() => {
-    return () => {
-      if (id) {
-        localStorage.removeItem(`dntel-form-draft-${id}`);
-      }
-    };
+  const clearLs = useCallback(() => {
+    if (id) {
+      localStorage.removeItem(`dntel-form-draft-${id}`);
+    }
   }, [id]);
-
-  const handleSubmit = useCallback<SubmitHandler<FormValues>>(
-    (values) => {
-      console.log(values, "values");
-      if (id) {
-        localStorage.removeItem(`dntel-form-draft-${id}`);
-      }
-    },
-    [id]
-  );
 
   const sections = useMemo(
     () => Object.entries(initialData.sections),
@@ -77,7 +77,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
   );
 
   const expandAll = useCallback(() => {
-    const allSectionIds = sections.map((_, index) => `section-${index}`);
+    const allSectionIds = sections.map((section) => section[0]);
     setExpandedSections(allSectionIds);
   }, [sections]);
 
@@ -101,12 +101,6 @@ function useDntelForm(initialData: FormValues, id?: string) {
     }
   }, []);
 
-  const clearLs = useCallback(() => {
-    if (id) {
-      localStorage.removeItem(`dntel-form-draft-${id}`);
-    }
-  }, [id]);
-
   const changeValue = useCallback(
     (key: string, value: string | Date | boolean) => {
       const [sectionKey, fieldKey] = key.split(".");
@@ -125,12 +119,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
       form.setValue(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         `sections.${sectionKey}.fields.${fieldKey}.value` as any,
-        convertedValue,
-        {
-          shouldValidate: true,
-          shouldDirty: true,
-          shouldTouch: true,
-        }
+        convertedValue
       );
     },
     [form]
@@ -150,7 +139,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
           id={id}
           onSubmit={(e) => {
             e.preventDefault();
-            form.handleSubmit(handleSubmit)(e);
+            form.handleSubmit(clearLs)(e);
           }}
           className="grid grid-cols-2 gap-8"
         >
@@ -158,21 +147,26 @@ function useDntelForm(initialData: FormValues, id?: string) {
             <Accordion
               type="multiple"
               key={section[1].title + index}
-              id={`section-${index}`}
+              id={section[0]}
               value={expandedSections}
-              onValueChange={setExpandedSections}
-              style={{ backgroundColor: section[1].bgColor }}
+              onValueChange={(value) => {
+                setExpandedSections(value);
+              }}
+              style={{
+                backgroundColor: section[1].bgColor,
+                order: section[1].order,
+              }}
               className={cn(
                 "p-4 rounded-sm text-primary w-full h-fit",
-                `order-${section[1].order}`,
                 section[1].layout === "full" ? "col-span-2" : "col-span-1"
               )}
             >
-              <AccordionItem value={`section-${index}`}>
-                <AccordionTrigger className="font-500">
-                  {section[1].title}
+              <AccordionItem value={section[0]}>
+                <AccordionTrigger className="font-500 text-lg ">
+                  {section[1].title}{" "}
+                  {`(${section[1].stats.filled}/${section[1].stats.total})`}
                 </AccordionTrigger>
-                <AccordionContent className="grid grid-cols-2 gap-5">
+                <AccordionContent className="grid grid-cols-2 gap-5 p-1">
                   {Object.entries(section[1].fields).map((field) => (
                     <div
                       key={field[1].key}
@@ -196,7 +190,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
         </form>
       </Form>
     ),
-    [form, id, handleSubmit, sections, expandedSections, editMode]
+    [form, id, clearLs, sections, expandedSections, editMode]
   );
 
   useEffect(() => {
@@ -214,32 +208,32 @@ function useDntelForm(initialData: FormValues, id?: string) {
       { threshold: 0.5 }
     );
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    sections.forEach(([_, section]) => {
-      const element = document.getElementById(`section-${section.order}`);
+    sections.forEach(([section]) => {
+      const element = document.getElementById(section);
       if (element) observer.observe(element);
     });
 
     return () => observer.disconnect();
   }, [sections, expandedSections]);
 
-  console.log(form.getValues(), "vlaues");
   return {
+    form,
+    DntelForm,
+    sections,
     editMode,
     setEditMode,
-    DntelForm,
-    expandedSections,
-    setExpandedSections,
-    lastChangeTimestamp,
-    changes,
     expandAll,
     collapseAll,
     expandSection,
     scrollToSection,
-    clearLs,
     reset,
-    changeValue,
     activeSection,
+    setActiveSection,
+    lastChangeTimestamp,
+    changes,
+    changeValue,
+    handleSubmit: form.handleSubmit,
+    clearLs,
   };
 }
 

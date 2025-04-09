@@ -1,10 +1,3 @@
-// type source = {
-//   channel: string;
-//   timestamp: string;
-
-//   [key: string]: string | { [key: string]: string };
-// };
-
 export interface Field {
   value: string | boolean | Date;
   title: string;

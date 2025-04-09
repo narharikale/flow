@@ -74,7 +74,7 @@ const SelectField = <TFieldValues extends FieldValues>({
 
           <Select
             onValueChange={(value) => handleChange(field, value)}
-            defaultValue={defaultValue}
+            defaultValue={field.value || defaultValue}
             disabled={disabled || readonly}
           >
             <FormControl className="bg-white text-stone-950 w-full">
