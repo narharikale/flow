@@ -1,5 +1,4 @@
 import "./App.css";
-import { useDntelForm } from "./packages/hooks/useDntelForm";
 import inputData from "./lib/inputData.json";
 
 function App() {

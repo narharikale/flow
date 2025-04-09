@@ -3,8 +3,8 @@ import { InputFormField } from "./TextField";
 import { DateField } from "./DateField";
 import { SelectField } from "./SelectField";
 import { BooleanField } from "./BooleanField";
-import { Field } from "@/packages/utils/types";
-import { FormValues } from "@/packages/utils/schema";
+import { Field } from "@/utils/types";
+import { FormValues } from "@/utils/schema";
 
 type Props = {
   form: UseFormReturn<FormValues>;

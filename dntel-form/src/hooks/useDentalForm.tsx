@@ -1,4 +1,10 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
+import {
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+  SetStateAction,
+} from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -11,11 +17,11 @@ import {
 } from "@/components/ui/accordion";
 
 import { cn } from "@/lib/utils";
-import { FieldRenderer } from "@/packages/components/FormFields/FieldRenderer";
+import { FieldRenderer } from "@/components/FormFields/FieldRenderer";
 import { useForm } from "react-hook-form";
 import { formSchema, FormValues } from "../utils/schema";
 
-function useDntelForm(initialData: FormValues, id?: string) {
+function useDentalForm(initialData: FormValues, id?: string) {
   const [editMode, setEditMode] = useState(false);
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -150,7 +156,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
               key={section[1].title + index}
               id={section[0]}
               value={expandedSections}
-              onValueChange={(value) => {
+              onValueChange={(value: SetStateAction<string[]>) => {
                 setExpandedSections(value);
               }}
               style={{
@@ -239,4 +245,4 @@ function useDntelForm(initialData: FormValues, id?: string) {
   };
 }
 
-export { useDntelForm };
+export { useDentalForm };
