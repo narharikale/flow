@@ -24,6 +24,11 @@ function useDntelForm(initialData: FormValues, id?: string) {
   );
   const [changes, setFormChanges] = useState<Record<string, unknown>>({});
 
+  const sections = useMemo(
+    () => Object.entries(initialData.sections),
+    [initialData.sections]
+  );
+
   const getDraft = useCallback(() => {
     if (!id) return null;
     const key = `dntel-form-draft-${id}`;
@@ -36,6 +41,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
     defaultValues: getDraft() || initialData,
   });
 
+  // get initial data
   useEffect(() => {
     if (!id) return;
     const key = `dntel-form-draft-${id}`;
@@ -46,6 +52,12 @@ function useDntelForm(initialData: FormValues, id?: string) {
       form.reset(initialData);
     }
   }, [id, form, initialData]);
+
+  const clearLs = useCallback(() => {
+    if (id) {
+      localStorage.removeItem(`dntel-form-draft-${id}`);
+    }
+  }, [id]);
 
   useEffect(() => {
     if (!id) return;
@@ -64,17 +76,6 @@ function useDntelForm(initialData: FormValues, id?: string) {
 
     return () => subscription.unsubscribe();
   }, [form, id]);
-
-  const clearLs = useCallback(() => {
-    if (id) {
-      localStorage.removeItem(`dntel-form-draft-${id}`);
-    }
-  }, [id]);
-
-  const sections = useMemo(
-    () => Object.entries(initialData.sections),
-    [initialData.sections]
-  );
 
   const expandAll = useCallback(() => {
     const allSectionIds = sections.map((section) => section[0]);
@@ -193,6 +194,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
     [form, id, clearLs, sections, expandedSections, editMode]
   );
 
+  // to get visible & expanded section
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
