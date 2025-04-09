@@ -9,17 +9,17 @@ import { FormValues } from "@/packages/utils/schema";
 type Props = {
   form: UseFormReturn<FormValues>;
   field: Field;
-  fieldKey: string;
-  sectionKey: string;
   disabled?: boolean;
+  sectionKey: string;
+  fieldKey: string;
 };
 
 const FieldRenderer = ({
   form,
   field,
-  fieldKey,
-  sectionKey,
   disabled,
+  sectionKey,
+  fieldKey,
 }: Props) => {
   const commonProps = {
     form,

@@ -18,6 +18,7 @@ import { formSchema, FormValues } from "../utils/schema";
 function useDntelForm(initialData: FormValues, id?: string) {
   const [editMode, setEditMode] = useState(true);
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const [lastChangeTimestamp, setLastChangeTimestamp] = useState<number | null>(
     null
   );
@@ -106,6 +107,23 @@ function useDntelForm(initialData: FormValues, id?: string) {
     }
   }, [id]);
 
+  const changeValue = useCallback(
+    (key: string, value: string) => {
+      const [sectionKey, fieldKey] = key.split(".");
+      form.setValue(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        `sections.${sectionKey}.fields.${fieldKey}.value` as any,
+        value,
+        {
+          shouldValidate: true,
+          shouldDirty: true,
+          shouldTouch: true,
+        }
+      );
+    },
+    [form]
+  );
+
   const reset = useCallback(() => {
     form.reset(initialData);
     setExpandedSections([]);
@@ -169,6 +187,29 @@ function useDntelForm(initialData: FormValues, id?: string) {
     [form, id, handleSubmit, sections, expandedSections, editMode]
   );
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (
+            entry.isIntersecting &&
+            expandedSections.includes(entry.target.id)
+          ) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    sections.forEach(([_, section]) => {
+      const element = document.getElementById(`section-${section.order}`);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [sections, expandedSections]);
+
   return {
     editMode,
     setEditMode,
@@ -183,6 +224,8 @@ function useDntelForm(initialData: FormValues, id?: string) {
     scrollToSection,
     clearLs,
     reset,
+    changeValue,
+    activeSection,
   };
 }
 
