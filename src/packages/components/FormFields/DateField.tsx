@@ -1,5 +1,3 @@
-"use client";
-
 import { format, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import {
@@ -9,8 +7,6 @@ import {
   ControllerRenderProps,
 } from "react-hook-form";
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
   FormControl,
@@ -26,6 +22,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 type Props<TFieldValues extends FieldValues = FieldValues> = {
   form: UseFormReturn<TFieldValues>;
@@ -44,11 +41,11 @@ const DateField = <TFieldValues extends FieldValues>({
   form,
   name,
   label,
-  placeholder = "Pick a date",
+  placeholder = "MM/DD/YYYY",
   description,
   required = false,
   disabled = false,
-  minDate = new Date("1900-01-01"),
+  minDate = new Date("1970-01-01"),
   maxDate = new Date(),
   onChange,
 }: Props<TFieldValues>) => {
@@ -70,12 +67,12 @@ const DateField = <TFieldValues extends FieldValues>({
             {label}
             {required && <span className="text-destructive ml-1">*</span>}
           </FormLabel>
-          <div className="flex gap-2">
+          <div className="relative">
             <FormControl>
               <Input
                 type="text"
                 placeholder={placeholder}
-                value={field.value ? format(field.value, "yyyy-MM-dd") : ""}
+                value={field.value ? format(field.value, "mm/dd/yyyy") : ""}
                 onChange={(e) => {
                   const value = e.target.value;
                   if (value === "") {
@@ -83,7 +80,7 @@ const DateField = <TFieldValues extends FieldValues>({
                     return;
                   }
                   try {
-                    const parsedDate = parse(value, "yyyy-MM-dd", new Date());
+                    const parsedDate = parse(value, "mm/dd/yyyy", new Date());
                     if (!isNaN(parsedDate.getTime())) {
                       handleChange(field, parsedDate);
                     }
@@ -92,30 +89,21 @@ const DateField = <TFieldValues extends FieldValues>({
                   }
                 }}
                 disabled={disabled}
-                className="w-[200px]"
+                className="pr-10"
               />
             </FormControl>
             <Popover>
               <PopoverTrigger asChild>
-                <FormControl>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "w-[240px] pl-3 text-left font-normal",
-                      !field.value && "text-muted-foreground"
-                    )}
-                    disabled={disabled}
-                  >
-                    {field.value ? (
-                      format(field.value, "PPP")
-                    ) : (
-                      <span>{placeholder}</span>
-                    )}
-                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                  </Button>
-                </FormControl>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                  disabled={disabled}
+                >
+                  <CalendarIcon className="h-4 w-4 opacity-50" />
+                </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent className="w-auto p-0" align="end">
                 <Calendar
                   mode="single"
                   selected={field.value}

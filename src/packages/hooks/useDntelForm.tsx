@@ -21,25 +21,54 @@ function useDntelForm(initialData: FormValues, id?: string) {
   const [lastChangeTimestamp, setLastChangeTimestamp] = useState<number | null>(
     null
   );
+  const [formChanges, setFormChanges] = useState<Record<string, unknown>>({});
+
+  const getDraft = useCallback(() => {
+    if (!id) return null;
+    const draft = localStorage.getItem(`dntel-form-draft-${id}`);
+    return draft ? JSON.parse(draft) : null;
+  }, [id]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: getDraft() || initialData,
   });
 
   useEffect(() => {
-    const subscription = form.watch((_, { type }) => {
-      if (type === "change") {
+    if (!id) return;
+
+    const subscription = form.watch((values, { type, name }) => {
+      if (type === "change" && name) {
         setLastChangeTimestamp(Date.now());
+        const currentValue = form.getValues(name as keyof FormValues);
+        setFormChanges((prev) => ({
+          ...prev,
+          [name]: currentValue,
+        }));
+        localStorage.setItem(`dntel-form-draft-${id}`, JSON.stringify(values));
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [form]);
+  }, [form, id]);
 
-  const handleSubmit = useCallback<SubmitHandler<FormValues>>((values) => {
-    console.log(values, "values");
-  }, []);
+  useEffect(() => {
+    return () => {
+      if (id) {
+        localStorage.removeItem(`dntel-form-draft-${id}`);
+      }
+    };
+  }, [id]);
+
+  const handleSubmit = useCallback<SubmitHandler<FormValues>>(
+    (values) => {
+      console.log(values, "values");
+      if (id) {
+        localStorage.removeItem(`dntel-form-draft-${id}`);
+      }
+    },
+    [id]
+  );
 
   const sections = useMemo(
     () => Object.entries(initialData.sections),
@@ -70,6 +99,19 @@ function useDntelForm(initialData: FormValues, id?: string) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, []);
+
+  const clearLs = useCallback(() => {
+    if (id) {
+      localStorage.removeItem(`dntel-form-draft-${id}`);
+    }
+  }, [id]);
+
+  const reset = useCallback(() => {
+    form.reset(initialData);
+    setExpandedSections([]);
+    setLastChangeTimestamp(null);
+    clearLs();
+  }, [form, initialData, clearLs]);
 
   const DntelForm = useCallback(
     () => (
@@ -134,10 +176,13 @@ function useDntelForm(initialData: FormValues, id?: string) {
     expandedSections,
     setExpandedSections,
     lastChangeTimestamp,
+    formChanges,
     expandAll,
     collapseAll,
     expandSection,
     scrollToSection,
+    clearLs,
+    reset,
   };
 }
 
