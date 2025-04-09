@@ -3,20 +3,10 @@ import { useDntelForm } from "./packages/hooks/useDntelForm";
 import inputData from "./lib/inputData.json";
 
 function App() {
-  const { DntelForm, changeValue } = useDntelForm(inputData, "test");
+  const { DntelForm } = useDntelForm(inputData, "test");
 
   return (
     <>
-      <button
-        onClick={() =>
-          changeValue(
-            "VerificationInformation.InsuranceRepresentativeName",
-            "test"
-          )
-        }
-      >
-        click
-      </button>
       <DntelForm />
     </>
   );

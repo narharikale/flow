@@ -5,7 +5,7 @@
       "layout": "left",
       "title": "Verification Information",
       "tooltip": "Information collected during the verification call",
-      "bgColor": "#f4fae6",
+      "bgColor": "#f3f5f6",
       "fields": {
         "InsuranceRepresentativeName": {
           "value": "",
@@ -66,7 +66,7 @@
       "layout": "right",
       "title": "Patient Information",
       "tooltip": "Patient's demographic and insurance details",
-      "bgColor": "#eefbf5",
+      "bgColor": "#f3f5f6",
       "fields": {
         "PatientName": {
           "value": "Ricardo Boada",
@@ -89,7 +89,7 @@
           "placeholder": "",
           "disabled": false,
           "tooltip": "",
-          "colSpan": "2"
+          "colSpan": "1"
         },
         "DateOfBirth": {
           "value": "4/14/89",
@@ -112,7 +112,7 @@
           "placeholder": "",
           "disabled": false,
           "tooltip": "",
-          "colSpan": "2"
+          "colSpan": "1"
         },
         "SubscriberID": {
           "value": "796380844 01",
@@ -297,7 +297,7 @@
       "layout": "full",
       "title": "Insurance Information",
       "tooltip": "Insurance policy and coverage details",
-      "bgColor": "#e4f1e8",
+      "bgColor": "#f3f5f6",
       "fields": {
         "InsuranceProvider": {
           "value": "Cigna",
@@ -548,7 +548,7 @@
       "layout": "full",
       "title": "Coverage Percentages",
       "tooltip": "Coverage percentages for different dental procedures",
-      "bgColor": "#e4f1e8",
+      "bgColor": "#f3f5f6",
       "fields": {
         "Diagnostic": {
           "value": "",
@@ -716,7 +716,7 @@
       "layout": "full",
       "title": "Maximums And Deductibles",
       "tooltip": "Annual maximums and deductibles information",
-      "bgColor": "#eefbf5",
+      "bgColor": "#f3f5f6",
       "fields": {
         "AnnualIndividualMaximum": {
           "value": "",
@@ -841,7 +841,7 @@
       "layout": "full",
       "title": "Questions",
       "tooltip": "Additional questions about insurance coverage",
-      "bgColor": "#f4fae6",
+      "bgColor": "#f3f5f6",
       "fields": {
         "Is there a missing tooth clause?": {
           "value": "",
@@ -917,7 +917,7 @@
       "order": 7,
       "layout": "full",
       "title": "Orthodontic Information",
-      "bgColor": "#e5faee",
+      "bgColor": "#f3f5f6",
       "fields": {
         "AgeLimit": {
           "value": "",

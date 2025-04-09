@@ -7,7 +7,6 @@ import {
 
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -47,7 +46,6 @@ const SelectField = <TFieldValues extends FieldValues>({
   placeholder,
   options,
   defaultValue,
-  description,
   readonly,
   required,
   disabled,
@@ -73,15 +71,13 @@ const SelectField = <TFieldValues extends FieldValues>({
               {required ? <span className="text-destructive">*</span> : null}
             </FormLabel>
           )}
-          {description ? (
-            <FormDescription>{description}</FormDescription>
-          ) : null}
+
           <Select
             onValueChange={(value) => handleChange(field, value)}
             defaultValue={defaultValue}
             disabled={disabled || readonly}
           >
-            <FormControl>
+            <FormControl className="bg-white text-stone-950 w-full">
               <SelectTrigger>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>

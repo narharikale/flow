@@ -1,4 +1,3 @@
-import { format, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import {
   UseFormReturn,
@@ -34,7 +33,7 @@ type Props<TFieldValues extends FieldValues = FieldValues> = {
   disabled?: boolean;
   minDate?: Date;
   maxDate?: Date;
-  onChange?: (value: Date | undefined) => void;
+  onChange?: (value: string | undefined) => void;
 };
 
 const DateField = <TFieldValues extends FieldValues>({
@@ -51,10 +50,22 @@ const DateField = <TFieldValues extends FieldValues>({
 }: Props<TFieldValues>) => {
   const handleChange = (
     field: ControllerRenderProps<TFieldValues, Path<TFieldValues>>,
-    value: Date | undefined
+    value: string | undefined
   ) => {
     field.onChange(value);
     onChange?.(value);
+  };
+
+  const formatDate = (date: Date) => {
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${month}/${day}/${year}`;
+  };
+
+  const parseDate = (dateStr: string) => {
+    const [month, day, year] = dateStr.split("/").map(Number);
+    return new Date(year, month - 1, day);
   };
 
   return (
@@ -72,24 +83,16 @@ const DateField = <TFieldValues extends FieldValues>({
               <Input
                 type="text"
                 placeholder={placeholder}
-                value={field.value ? format(field.value, "mm/dd/yyyy") : ""}
+                value={field.value}
                 onChange={(e) => {
                   const value = e.target.value;
-                  if (value === "") {
-                    handleChange(field, undefined);
-                    return;
-                  }
-                  try {
-                    const parsedDate = parse(value, "mm/dd/yyyy", new Date());
-                    if (!isNaN(parsedDate.getTime())) {
-                      handleChange(field, parsedDate);
-                    }
-                  } catch {
-                    // Invalid date format, keep the input value but don't update the field
+                  // Only allow numbers and forward slashes
+                  if (/^[\d/]*$/.test(value)) {
+                    handleChange(field, value);
                   }
                 }}
                 disabled={disabled}
-                className="pr-10"
+                className="pr-10 bg-white text-stone-950"
               />
             </FormControl>
             <Popover>
@@ -100,14 +103,16 @@ const DateField = <TFieldValues extends FieldValues>({
                   className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
                   disabled={disabled}
                 >
-                  <CalendarIcon className="h-4 w-4 opacity-50" />
+                  <CalendarIcon className="h-4 w-4 text-stone-950" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="end">
+              <PopoverContent className="w-auto p-0" align="start">
                 <Calendar
                   mode="single"
-                  selected={field.value}
-                  onSelect={(date) => handleChange(field, date)}
+                  selected={field.value ? parseDate(field.value) : undefined}
+                  onSelect={(date) =>
+                    handleChange(field, date ? formatDate(date) : undefined)
+                  }
                   disabled={(date) => date > maxDate || date < minDate}
                   initialFocus
                 />

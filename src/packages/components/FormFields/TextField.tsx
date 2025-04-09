@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -38,7 +37,6 @@ const InputFormField = <TFieldValues extends FieldValues>({
   label,
   placeholder,
   type,
-  description,
   readonly,
   required,
   disabled,
@@ -64,11 +62,10 @@ const InputFormField = <TFieldValues extends FieldValues>({
               {required ? <span className="text-destructive">*</span> : null}
             </FormLabel>
           )}
-          {description ? (
-            <FormDescription>{description}</FormDescription>
-          ) : null}
+
           <FormControl>
             <Input
+              className="bg-white text-stone-950"
               type={type}
               placeholder={placeholder}
               required={required}

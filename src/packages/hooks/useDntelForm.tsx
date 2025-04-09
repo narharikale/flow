@@ -22,7 +22,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
   const [lastChangeTimestamp, setLastChangeTimestamp] = useState<number | null>(
     null
   );
-  const [formChanges, setFormChanges] = useState<Record<string, unknown>>({});
+  const [changes, setFormChanges] = useState<Record<string, unknown>>({});
 
   const getDraft = useCallback(() => {
     if (!id) return null;
@@ -108,12 +108,24 @@ function useDntelForm(initialData: FormValues, id?: string) {
   }, [id]);
 
   const changeValue = useCallback(
-    (key: string, value: string) => {
+    (key: string, value: string | Date | boolean) => {
       const [sectionKey, fieldKey] = key.split(".");
+      const field = form.getValues(`sections.${sectionKey}.fields.${fieldKey}`);
+
+      let convertedValue = value;
+      if (field?.interface?.type === "date" && typeof value === "string") {
+        convertedValue = new Date(value);
+      } else if (
+        field?.interface?.type === "boolean" &&
+        typeof value === "string"
+      ) {
+        convertedValue = value === "true";
+      }
+
       form.setValue(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         `sections.${sectionKey}.fields.${fieldKey}.value` as any,
-        value,
+        convertedValue,
         {
           shouldValidate: true,
           shouldDirty: true,
@@ -202,6 +214,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
       { threshold: 0.5 }
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     sections.forEach(([_, section]) => {
       const element = document.getElementById(`section-${section.order}`);
       if (element) observer.observe(element);
@@ -210,6 +223,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
     return () => observer.disconnect();
   }, [sections, expandedSections]);
 
+  console.log(form.getValues(), "vlaues");
   return {
     editMode,
     setEditMode,
@@ -217,7 +231,7 @@ function useDntelForm(initialData: FormValues, id?: string) {
     expandedSections,
     setExpandedSections,
     lastChangeTimestamp,
-    formChanges,
+    changes,
     expandAll,
     collapseAll,
     expandSection,

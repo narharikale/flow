@@ -1,12 +1,12 @@
-type source = {
-  channel: string;
-  timestamp: string;
+// type source = {
+//   channel: string;
+//   timestamp: string;
 
-  [key: string]: string | { [key: string]: string };
-};
+//   [key: string]: string | { [key: string]: string };
+// };
 
-export type Field = {
-  value: string;
+export interface Field {
+  value: string | boolean | Date;
   title: string;
   interface: {
     type: string;
@@ -21,8 +21,12 @@ export type Field = {
   disabled: boolean;
   tooltip: string;
   colSpan: string;
-  source?: source;
-};
+  source?: {
+    channel: string;
+    timestamp: string;
+    [key: string]: string | Record<string, string>;
+  };
+}
 
 type Fields = {
   [key: string]: Field;
